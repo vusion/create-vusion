@@ -1,0 +1,57 @@
+{
+  "name": "create-vusion",
+  "version": "0.0.1",
+  "description": "CLI for create Vusion Projects.",
+  "main": "index.js",
+  "bin": {
+    "create-vusion": "bin/vusion"
+  },
+  "scripts": {
+    "precommit": "node node_modules/vusion-hooks/precommit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vusion/create-vusion.git"
+  },
+  "keywords": [
+    "vusion",
+    "cli",
+    "init"
+  ],
+  "tags": [
+    "vusion",
+    "cli",
+    "init"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vusion/create-vusion/issues"
+  },
+  "homepage": "https://github.com/vusion/create-vusion#readme",
+  "engines": {
+    "node": ">=8"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "chalk": "^2.4.2",
+    "commander": "^4.0.0",
+    "inquirer": "^7.0.0",
+    "lodash": "^4.17.15",
+    "npmlog": "^4.1.2",
+    "ora": "^4.0.2",
+    "request-pre": "^0.1.0",
+    "semver": "^6.3.0",
+    "shelljs": "^0.8.3",
+    "tar": "^5.0.5",
+    "update-notifier": "^3.0.1",
+    "user-home": "^2.0.0",
+    "vusion-api": "^0.4.6"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-vusion": "^3.0.2",
+    "husky": "^3.0.9",
+    "vusion-hooks": "^0.3.0"
+  }
+}
