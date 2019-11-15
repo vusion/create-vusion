@@ -1,12 +1,6 @@
-# Vusion CLI
+# Create Vusion
 
 CLI for init Vusion Projects.
-
-## Install
-
-``` shell
-npm install -g vusion-cli
-```
 
 ## Quick Start
 
@@ -14,6 +8,12 @@ npm install -g vusion-cli
 npm init vusion ./app
 // same as
 npm create vusion ./app
+```
+
+## Install
+
+``` shell
+npm install -g create-vusion
 ```
 
 ## Commands
