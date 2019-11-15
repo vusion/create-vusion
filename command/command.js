@@ -25,6 +25,8 @@ module.exports = function () {
                     name,
                     dir: dir || name,
                     material: templates[type],
+                    access: 'public',
+                    team: '',
                 });
             });
     });
@@ -39,6 +41,8 @@ module.exports = function () {
                 name,
                 dir: dir || name,
                 material: program.option.template || templates[type],
+                access: 'public',
+                team: '',
             });
         });
     program
