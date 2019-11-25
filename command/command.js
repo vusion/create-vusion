@@ -3,6 +3,7 @@ const pkg = require('../package.json');
 const init = require('../lib/material/init');
 const run = require('../lib');
 const templates = require('./templates');
+const utils = require('../lib/utils');
 module.exports = function () {
     program
         .usage('\n\t[User]: <dir> [templateName]\n\t[Contributor]: <type> <name> [dir]')
@@ -22,7 +23,7 @@ module.exports = function () {
                 init({
                     type,
                     name,
-                    dir: dir || name,
+                    dir: dir || utils.getNPMDir(name),
                     material: templates[type],
                     access: 'public',
                     team: '',
@@ -38,7 +39,7 @@ module.exports = function () {
             init({
                 type,
                 name,
-                dir: dir || name,
+                dir: dir || utils.getNPMDir(name),
                 material: program.option.template || templates[type],
                 access: 'public',
                 team: '',

@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const templates = require('./templates');
 const init = require('../lib/material/init');
+const utils = require('../lib/utils');
 module.exports = function () {
     inquirer
         .prompt([
@@ -40,7 +41,7 @@ module.exports = function () {
                 name: 'dir',
                 message: 'input a directory',
                 default(ansers) {
-                    return ansers.name;
+                    return utils.getNPMDir(ansers.name);
                 },
             },
             {
