@@ -46,8 +46,8 @@
     "shelljs": "^0.8.3",
     "tar": "^5.0.5",
     "update-notifier": "^3.0.1",
-    "user-home": "^2.0.0",
-    "vusion-api": "^0.4.6"
+    "vusion-api": "^0.4.6",
+    "yaml": "^1.7.2"
   },
   "devDependencies": {
     "eslint": "^6.6.0",

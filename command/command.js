@@ -1,7 +1,6 @@
 const program = require('commander');
 const pkg = require('../package.json');
 const init = require('../lib/material/init');
-const config = require('../lib/config');
 const run = require('../lib');
 const templates = require('./templates');
 module.exports = function () {
@@ -44,22 +43,6 @@ module.exports = function () {
                 access: 'public',
                 team: '',
             });
-        });
-    program
-        .command('config <action> [key] [value]')
-        .description(`config list, config get [key], config set <key> [value]`)
-        .action((action, key, value) => {
-            const result = config({
-                action,
-                key,
-                value,
-            });
-            if (typeof result === 'string') {
-                return result;
-            } else if (result) {
-                return JSON.stringify(result, null, 4);
-            }
-            return result;
         });
     program.parse(process.argv);
 };
