@@ -17,7 +17,7 @@ module.exports = function () {
         });
     ['block', 'repository', 'component'].forEach((type) => {
         program
-            .command(`${type} <name> [dir]`)
+            .command(`${type} <npmName> [dir]`)
             .description(`init a ${type}`)
             .action((name, dir) => {
                 init({
@@ -31,8 +31,8 @@ module.exports = function () {
             });
     });
     program
-        .command('template <name> [dir]')
-        .description(`init a template`)
+        .command('template <npmName> [dir]')
+        .description(`init a template, default: cloud-admin-template`)
         .option('-t, --template <templateName>', 'base on template')
         .action((name, dir) => {
             const type = 'template';

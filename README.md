@@ -5,9 +5,9 @@ CLI for init Vusion Projects.
 ## Quick Start
 
 ``` shell
-npm init vusion ./app
-// same as
 npm create vusion ./app
+// same as
+npm init vusion ./app
 ```
 
 ## Install
@@ -29,15 +29,11 @@ npm install -g create-vusion
 
 #### command
 
-- `npm init vusion block <name> [dir]`: Initalize a block
-- `npm init vusion repository <name> [dir]`: Initalize a repository
-- `npm init vusion component <name> [dir]`: Initalize a component
-- `npm init vusion template [options] <name> [dir]`: Initalize a template
+- `npm init vusion block <npmName> [dir]`: Initalize a block
+- `npm init vusion repository <npmName> [dir]`: Initalize a repository
+- `npm init vusion component <npmName> [dir]`: Initalize a component
+- `npm init vusion template [options] <npmName> [dir]`: Initalize a template
   - `-t, --template <templateName>`: Initalize a template base on templateName (default: [cloud-admin-template](https://github.com/vusion-templates/cloud-admin-template))
-- `npm init vusion config <action> [key] [value]`: get or set config
-  - `list`: show config
-  - `get [key]`: show config[key] or config
-  - `set [key] [value]`: set config
 
 #### prompt
 

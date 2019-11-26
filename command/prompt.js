@@ -86,6 +86,9 @@ module.exports = function () {
                     }
                     return true;
                 },
+                when(ansers) {
+                    return ansers.access !== 2;
+                },
             },
         ]).then((ansers) => {
             if (!ansers.material) {
