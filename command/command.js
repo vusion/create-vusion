@@ -6,9 +6,9 @@ const templates = require('./templates');
 const utils = require('../lib/utils');
 module.exports = function () {
     program
-        .usage('\n\t[User]: <dir> [templateName]\n\t[Contributor]: <type> <name> [dir]')
+        .usage('\n\t[User]: <dir> [template-name]\n\t[Contributor]: <type> <name> [dir]')
         .version(pkg.version)
-        .arguments('<dir> [templateName]')
+        .arguments('<dir> [template-name]')
         .action((dir, templateName) => {
             run({
                 dir,
@@ -17,7 +17,7 @@ module.exports = function () {
         });
     ['block', 'repository', 'component'].forEach((type) => {
         program
-            .command(`${type} <npmName> [dir]`)
+            .command(`${type} <npm-name> [dir]`)
             .description(`init a ${type}`)
             .action((name, dir) => {
                 init({
@@ -31,7 +31,7 @@ module.exports = function () {
             });
     });
     program
-        .command('template <npmName> [dir]')
+        .command('template <npm-name> [dir]')
         .description(`init a template, default: cloud-admin-template`)
         .option('-t, --template <templateName>', 'base on template')
         .action((name, dir) => {
