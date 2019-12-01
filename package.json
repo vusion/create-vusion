@@ -4,7 +4,7 @@
   "description": "CLI for create Vusion Projects.",
   "main": "index.js",
   "bin": {
-    "create-vusion": "bin/vusion"
+    "create-vusion": "bin/create-vusion"
   },
   "scripts": {
     "lint": "npx eslint --quiet",
@@ -21,10 +21,7 @@
       "git add"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vusion/create-vusion.git"
-  },
+  "repository": "vusion/create-vusion",
   "keywords": [
     "vusion",
     "cli",
@@ -37,9 +34,7 @@
   ],
   "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vusion/create-vusion/issues"
-  },
+  "bugs": "https://github.com/vusion/create-vusion/issues",
   "homepage": "https://github.com/vusion/create-vusion#readme",
   "engines": {
     "node": ">=8"
@@ -64,6 +59,7 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-config-vusion": "^3.0.2",
-    "husky": "^3.0.9"
+    "husky": "^3.0.9",
+    "lint-staged": "^9.5.0"
   }
 }
