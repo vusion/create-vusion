@@ -21,13 +21,15 @@ module.exports = async function () {
 
     ['block', 'repository', 'component'].forEach((type) => {
         program
-            .command(`${type} <package-name> [dir]`)
+            .command(`${type} [package-name] [dir]`)
             .description(`init a ${type}`)
-            .action((packageName, dir) => {
+            .action((name, dir) => {
+                // @TODO: if (name === undefined)
+
                 init({
                     type,
-                    packageName,
-                    dir: dir || utils.getNPMDir(packageName),
+                    name,
+                    dir: dir || utils.getNPMDir(name),
                     material: templates[type],
                     access: 'public',
                     team: '',
@@ -39,12 +41,12 @@ module.exports = async function () {
         .command('template <package-name> [dir]')
         .description(`init a template, default: cloud-admin-template`)
         .option('-t, --template <templateName>', 'base on template')
-        .action((packageName, dir) => {
+        .action((name, dir) => {
             const type = 'template';
             init({
                 type,
-                packageName,
-                dir: dir || utils.getNPMDir(packageName),
+                name,
+                dir: dir || utils.getNPMDir(name),
                 material: program.option.template || templates[type],
                 access: 'public',
                 team: '',
@@ -88,31 +90,32 @@ module.exports = async function () {
             repository: ['my-materials'],
         };
 
-        const { packageName, dir } = await inquirer.prompt([
+        const { name, dir } = await inquirer.prompt([
             {
                 type: 'input',
-                name: 'packageName',
-                message: `Please input a package name. It will be also used as the ${type} name.
+                name: 'name',
+                message: `Please input a package name.
+  It will also be used as the ${type} name.
   For examples: ${TIPS[type].join(', ')}
  `,
-                validate(packageName) {
-                    return !!packageName;
+                validate(name) {
+                    return !!name;
                 },
             },
             {
                 type: 'input',
                 name: 'dir',
-                message: 'Please input a directory',
+                message: 'Do you want to change the directory? Default is',
                 default(answers) {
-                    return utils.getNPMDir(answers.packageName);
+                    return utils.getNPMDir(answers.name);
                 },
             },
         ]);
 
         init({
             type,
-            packageName,
-            dir: dir || utils.getNPMDir(packageName),
+            name,
+            dir: dir || utils.getNPMDir(name),
             material: program.option.template || templates[type],
             access: 'public',
             team: '',
