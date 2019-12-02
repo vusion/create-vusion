@@ -3,10 +3,45 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const pkg = require('../package.json');
 const init = require('../lib/material/init');
-const run = require('../lib/run');
 const utils = require('../lib/utils');
 
 module.exports = function () {
+    program
+        .usage(`
+[User]: <template-name> <app-name>
+[Contributor]: <type> <package-name>
+`)
+        .version(pkg.version)
+        .arguments('[template-name] [app-name]')
+        .action(async (templateName, name) => {
+            if (name === undefined) {
+                const { packageName } = await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'packageName',
+                        message: `Please input a package name.
+  It will also be used as the project name.
+  For examples: ${chalk.cyan('my-project')}
+ `,
+                        validate(name) {
+                            return !!name;
+                        },
+                    },
+                ]);
+
+                name = packageName;
+            }
+
+            return init({
+                type: templateName,
+                material: templateName,
+                name,
+                path: name,
+                access: 'public',
+                team: '',
+            });
+        });
+
     ['block', 'component', 'repository'].forEach((type) => {
         program
             .command(`${type} [package-name]`)
@@ -51,32 +86,54 @@ module.exports = function () {
         .command('template [package-name]')
         .description(`Initialize a vusion template, default: cloud-admin-lite`)
         .option('-t, --template <template-name>', 'base on template')
-        .action((name, obj) => {
+        .action(async (name, obj) => {
             const type = 'template';
+
+            if (!obj.template) {
+                const { template } = await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'template',
+                        message: 'Please input a based-on template name',
+                        default: 'cloud-admin-lite',
+                    },
+                ]);
+
+                /* eslint-disable require-atomic-updates */
+                obj.template = template;
+            }
+
+            if (name === undefined) {
+                const TIPS = {
+                    template: ['my-template'],
+                };
+
+                const { packageName } = await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'packageName',
+                        message: `Please input a package name.
+  It will also be used as the ${type} name and file name.
+  For examples: ${chalk.cyan(TIPS[type].join(', '))}
+ `,
+                        validate(name) {
+                            return !!name;
+                        },
+                    },
+                ]);
+
+                name = packageName;
+            }
+
             return init({
                 type,
-                material: obj.template || 'cloud-admin-lite',
+                material: obj.template,
                 name,
                 path: utils.getFileName(name),
                 access: 'public',
                 team: '',
             });
         });
-
-    program
-        .usage(`
-[User]: [template-name] <dir>
-[Contributor]: <type> <name> [dir]
-`)
-        .version(pkg.version)
-        .arguments('[template-name] [dest]')
-        .action((templateName, dir) => {
-            return run({
-                dir,
-                material: templateName || 'cloud-admin-lite',
-            });
-        });
-
 
     program.parse(process.argv);
 };

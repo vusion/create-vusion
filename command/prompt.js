@@ -35,7 +35,7 @@ module.exports = async function () {
     const TIPS = {
         block: ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
         component: ['s-user-transfer.vue, @cloud-ui/s-user-transfer.vue'],
-        template: ['my-admin'],
+        template: ['my-template'],
         repository: ['my-materials'],
         'cloud-admin-lite': ['my-admin'],
     };

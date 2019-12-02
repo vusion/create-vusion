@@ -5,9 +5,15 @@ CLI for init Vusion Projects.
 ## Quick Start
 
 ``` shell
-npm create vusion ./app
+npm create vusion
 // same as
-npm init vusion ./app
+npm init vusion
+```
+
+``` shell
+npm create vusion admin-cloud-lite my-admin
+// same as
+npm init vusion admin-cloud-lite my-admin
 ```
 
 ## Install
@@ -23,17 +29,17 @@ npm install -g create-vusion
 
 ### User
 
-- `npm create vusion <dir> [template-name]`: Initialize a vusion project base on [template-name](default: [cloud-admin-template](https://github.com/vusion-templates/cloud-admin-template))
+- `npm create vusion [template-name] [package-name]`: Initialize a vusion project based on [template-name]
 
 ### Contributor
 
 #### command
 
-- `npm init vusion block <package-name> [dir]`: Initialize a vusion block
-- `npm init vusion component <package-name> [dir]`: Initialize a vusion component
-- `npm init vusion repository <package-name> [dir]`: Initialize a vusion repository
-- `npm init vusion template [options] <package-name> [dir]`: Initialize a template based on an existing template
-  - `-t, --template <template-name>`: Based on template-name (default: [cloud-admin-template](https://github.com/vusion-templates/cloud-admin-template))
+- `npm init vusion block [package-name]`: Initialize a vusion block
+- `npm init vusion component [package-name]`: Initialize a vusion component
+- `npm init vusion repository [package-name]`: Initialize a vusion repository
+- `npm init vusion template [package-name] [options]`: Initialize a template based on an existing template
+  - `-t, --template <template-name>`: Based on template-name (default: [cloud-admin-lite](https://github.com/vusion-templates/cloud-admin-lite))
 
 #### prompt
 
