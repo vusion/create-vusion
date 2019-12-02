@@ -23,17 +23,17 @@ npm install -g create-vusion
 
 ### User
 
-- `npm create vusion <dir> [templateName]`: Initalize a vusion project base on [templateName](default: [cloud-admin-template](https://github.com/vusion-templates/cloud-admin-template))
+- `npm create vusion <dir> [template-name]`: Initialize a vusion project base on [template-name](default: [cloud-admin-template](https://github.com/vusion-templates/cloud-admin-template))
 
 ### Contributor
 
 #### command
 
-- `npm init vusion block <npmName> [dir]`: Initalize a block
-- `npm init vusion repository <npmName> [dir]`: Initalize a repository
-- `npm init vusion component <npmName> [dir]`: Initalize a component
-- `npm init vusion template [options] <npmName> [dir]`: Initalize a template
-  - `-t, --template <templateName>`: Initalize a template base on templateName (default: [cloud-admin-template](https://github.com/vusion-templates/cloud-admin-template))
+- `npm init vusion block <package-name> [dir]`: Initialize a block
+- `npm init vusion repository <package-name> [dir]`: Initialize a repository
+- `npm init vusion component <package-name> [dir]`: Initialize a component
+- `npm init vusion template [options] <package-name> [dir]`: Initialize a template
+  - `-t, --template <template-name>`: Initialize a template base on template-name (default: [cloud-admin-template](https://github.com/vusion-templates/cloud-admin-template))
 
 #### prompt
 
