@@ -1,6 +1,6 @@
 {
   "name": "create-vusion",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "CLI for create Vusion Projects.",
   "main": "index.js",
   "bin": {
