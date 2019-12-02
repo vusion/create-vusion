@@ -2,9 +2,14 @@
 
 const checker = require('../lib/checker');
 const command = require('../command/command');
+const prompt = require('../command/prompt');
 
 if (!checker.checkNode())
     process.exit(1);
 checker.checkUpgrade();
 
-command();
+if (process.argv.length <= 2) {
+    prompt();
+} else {
+    command();
+}
