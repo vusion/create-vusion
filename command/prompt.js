@@ -40,14 +40,20 @@ module.exports = async function () {
         'cloud-admin-lite': ['my-admin'],
     };
 
+    let message = `Please input a package name.
+  It will also be used as the ${type} name and file name.
+  For examples: ${chalk.cyan(TIPS[type].join(', '))}
+ `;
+
+    if (type === 'cloud-admin-lite')
+        message = `Please input the project name`;
+
     const { name } = await inquirer.prompt([
         {
             type: 'input',
             name: 'name',
-            message: `Please input a package name.
-  It will also be used as the ${type} name and file name.
-  For examples: ${chalk.cyan(TIPS[type].join(', '))}
- `,
+            message,
+            default: type === 'cloud-admin-lite' ? 'my-admin' : undefined,
             validate(name) {
                 return !!name;
             },

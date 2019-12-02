@@ -19,10 +19,8 @@ module.exports = function () {
                     {
                         type: 'input',
                         name: 'packageName',
-                        message: `Please input a package name.
-  It will also be used as the project name.
-  For examples: ${chalk.cyan('my-project')}
- `,
+                        message: `Please input the project name`,
+                        default: 'my-project',
                         validate(name) {
                             return !!name;
                         },
