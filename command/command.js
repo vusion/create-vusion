@@ -13,7 +13,8 @@ module.exports = function () {
 `)
         .version(pkg.version)
         .arguments('[template-name] [app-name]')
-        .action(async (templateName, name) => {
+        .option('-f, --force', 'Force overwriting if directory existing')
+        .action(async (templateName, name, options) => {
             if (name === undefined) {
                 const { packageName } = await inquirer.prompt([
                     {
@@ -37,6 +38,8 @@ module.exports = function () {
                 path: name,
                 access: 'public',
                 team: '',
+            }, {
+                force: options.force,
             });
         });
 
@@ -44,7 +47,8 @@ module.exports = function () {
         program
             .command(`${type} [package-name]`)
             .description(`Initialize a vusion ${type}`)
-            .action(async (name) => {
+            .option('-f, --force', 'Force overwriting if directory existing')
+            .action(async (name, options) => {
                 if (name === undefined) {
                     const TIPS = {
                         block: ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
@@ -76,6 +80,8 @@ module.exports = function () {
                     path: utils.getFileName(name),
                     access: 'public',
                     team: '',
+                }, {
+                    force: options.force,
                 });
             });
     });
@@ -84,10 +90,11 @@ module.exports = function () {
         .command('template [package-name]')
         .description(`Initialize a vusion template, default: cloud-admin-lite`)
         .option('-t, --template <template-name>', 'base on template')
-        .action(async (name, obj) => {
+        .option('-f, --force', 'Force overwriting if directory existing')
+        .action(async (name, options) => {
             const type = 'template';
 
-            if (!obj.template) {
+            if (!options.template) {
                 const { template } = await inquirer.prompt([
                     {
                         type: 'input',
@@ -98,7 +105,7 @@ module.exports = function () {
                 ]);
 
                 /* eslint-disable require-atomic-updates */
-                obj.template = template;
+                options.template = template;
             }
 
             if (name === undefined) {
@@ -125,11 +132,13 @@ module.exports = function () {
 
             return init({
                 type,
-                material: obj.template,
+                material: options.template,
                 name,
                 path: utils.getFileName(name),
                 access: 'public',
                 team: '',
+            }, {
+                force: options.force,
             });
         });
 
