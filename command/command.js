@@ -11,37 +11,7 @@ module.exports = function () {
 [User]: <template-name> <app-name>
 [Contributor]: <type> <package-name>
 `)
-        .version(pkg.version)
-        .arguments('[template-name] [app-name]')
-        .option('-f, --force', 'Force overwriting if directory existing')
-        .action(async (templateName, name, options) => {
-            if (name === undefined) {
-                const { packageName } = await inquirer.prompt([
-                    {
-                        type: 'input',
-                        name: 'packageName',
-                        message: `Please input the project name`,
-                        default: 'my-project',
-                        validate(name) {
-                            return !!name;
-                        },
-                    },
-                ]);
-
-                name = packageName;
-            }
-
-            return init({
-                type: templateName,
-                material: templateName,
-                name,
-                path: name,
-                access: 'public',
-                team: '',
-            }, {
-                force: options.force,
-            });
-        });
+        .version(pkg.version);
 
     ['block', 'component', 'repository'].forEach((type) => {
         program
@@ -135,6 +105,38 @@ module.exports = function () {
                 material: options.template,
                 name,
                 path: utils.getFileName(name),
+                access: 'public',
+                team: '',
+            }, {
+                force: options.force,
+            });
+        });
+
+    program
+        .arguments('[template-name] [app-name]')
+        // .option('-f, --force', 'Force overwriting if directory existing')
+        .action(async (templateName, name, options) => {
+            if (name === undefined) {
+                const { packageName } = await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'packageName',
+                        message: `Please input the project name`,
+                        default: 'my-project',
+                        validate(name) {
+                            return !!name;
+                        },
+                    },
+                ]);
+
+                name = packageName;
+            }
+
+            return init({
+                type: templateName,
+                material: templateName,
+                name,
+                path: name,
                 access: 'public',
                 team: '',
             }, {
