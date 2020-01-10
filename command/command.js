@@ -114,7 +114,7 @@ module.exports = function () {
 
     program
         .arguments('[template-name] [app-name]')
-        // .option('-f, --force', 'Force overwriting if directory existing')
+        .option('-f, --force', 'Force overwriting if directory existing')
         .action(async (templateName, name, options) => {
             if (name === undefined) {
                 const { packageName } = await inquirer.prompt([
