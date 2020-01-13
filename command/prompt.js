@@ -2,34 +2,36 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const init = require('../lib/material/init');
 const utils = require('../lib/utils');
+const typeList = [
+    {
+        name: 'cloud-admin-lite' + chalk.gray(' - Initialize a vusion project based on cloud-admin-lite. use together with vusion block.'),
+        value: 'cloud-admin-lite',
+    },
+    {
+        name: 'block' + chalk.gray(' - Initialize a vusion block'),
+        value: 'block',
+    },
+    {
+        name: 'component' + chalk.gray(' - Initialize a vusion custom component'),
+        value: 'component',
+    },
+    {
+        name: 'template' + chalk.gray(' - Initialize a template based on cloud-admin-lite'),
+        value: 'template',
+    },
+    {
+        name: 'repository' + chalk.gray(' - Initialize a material repository to store components and blocks'),
+        value: 'repository',
+    },
+];
+const contributorTypes = typeList.map((item) => item.value).slice(1);
 
 module.exports = async function () {
     const { type } = await inquirer.prompt([{
         type: 'list',
         name: 'type',
         message: 'Select a material type',
-        choices: [
-            {
-                name: 'cloud-admin-lite' + chalk.gray(' - Initialize a vusion project based on cloud-admin-lite. use together with vusion block.'),
-                value: 'cloud-admin-lite',
-            },
-            {
-                name: 'block' + chalk.gray(' - Initialize a vusion block'),
-                value: 'block',
-            },
-            {
-                name: 'component' + chalk.gray(' - Initialize a vusion custom component'),
-                value: 'component',
-            },
-            {
-                name: 'template' + chalk.gray(' - Initialize a template based on cloud-admin-lite'),
-                value: 'template',
-            },
-            {
-                name: 'repository' + chalk.gray(' - Initialize a material repository to store components and blocks'),
-                value: 'repository',
-            },
-        ],
+        choices: typeList,
     }]);
 
     const TIPS = {
@@ -67,5 +69,7 @@ module.exports = async function () {
         path: utils.getFileName(name),
         access: 'public',
         team: '',
+    }, {
+        isUser: !contributorTypes.includes(type),
     });
 };

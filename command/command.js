@@ -141,6 +141,7 @@ module.exports = function () {
                 team: '',
             }, {
                 force: options.force,
+                isUser: true,
             });
         });
 
