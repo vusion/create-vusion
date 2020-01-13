@@ -13,11 +13,13 @@ module.exports = async function () {
     }]);
 
     const TIPS = {
-        block: ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
-        component: ['s-user-transfer.vue, @cloud-ui/s-user-transfer.vue'],
+        'cloud-admin-lite': ['my-admin'],
+        block: ['s-search-form', '@cloud-ui/s-search-form'],
+        component: ['s-user-transfer, @cloud-ui/s-user-transfer'],
         template: ['my-template'],
         repository: ['my-materials'],
-        'cloud-admin-lite': ['my-admin'],
+        'multifile-block': ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
+        'multifile-component': ['s-user-transfer.vue, @cloud-ui/s-user-transfer.vue'],
     };
 
     let message = `Please input a package name.

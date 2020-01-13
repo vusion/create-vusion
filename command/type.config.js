@@ -20,9 +20,17 @@ const typeList = [
         name: 'repository' + chalk.gray(' - Initialize a material repository to store components and blocks'),
         value: 'repository',
     },
+    {
+        name: 'multifile-block' + chalk.gray(' - Initialize a vusion multifile block'),
+        value: 'multifile-block',
+    },
+    {
+        name: 'multifile-component' + chalk.gray(' - Initialize a vusion multifile custom component'),
+        value: 'multifile-component',
+    },
 ];
 const contributorTypes = typeList.map((item) => item.value).slice(1);
 
 exports.contributorTypes = contributorTypes;
-exports.formatTypes = ['block', 'component', 'repository'];
+exports.formatTypes = ['block', 'component', 'repository', 'multifile-block', 'multifile-component'];
 exports.typeList = typeList;

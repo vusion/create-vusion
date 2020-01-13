@@ -13,7 +13,7 @@ module.exports = function () {
 `)
         .version(pkg.version);
 
-    ['block', 'component', 'repository'].forEach((type) => {
+    ['block', 'component', 'repository', 'multifile-block', 'multifile-component'].forEach((type) => {
         program
             .command(`${type} [package-name]`)
             .description(`Initialize a vusion ${type}`)
@@ -21,9 +21,11 @@ module.exports = function () {
             .action(async (name, options) => {
                 if (name === undefined) {
                     const TIPS = {
-                        block: ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
-                        component: ['s-user-transfer.vue, @cloud-ui/s-user-transfer.vue'],
+                        block: ['s-user-transfer, @cloud-ui/s-user-transfer'],
+                        component: ['s-user-transfer, @cloud-ui/s-user-transfer'],
                         repository: ['my-materials'],
+                        'multifile-block': ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
+                        'multifile-component': ['s-user-transfer.vue, @cloud-ui/s-user-transfer.vue'],
                     };
 
                     const { packageName } = await inquirer.prompt([
