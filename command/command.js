@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const pkg = require('../package.json');
 const init = require('../lib/material/init');
 const utils = require('../lib/utils');
+const { typeTips, formatTypes, defaultTemplate } = require('./type.config');
 
 module.exports = function () {
     program
@@ -13,20 +14,14 @@ module.exports = function () {
 `)
         .version(pkg.version);
 
-    ['block', 'component', 'repository', 'multifile-block', 'multifile-component'].forEach((type) => {
+    formatTypes.forEach((type) => {
         program
             .command(`${type} [package-name]`)
             .description(`Initialize a vusion ${type}`)
             .option('-f, --force', 'Force overwriting if directory existing')
             .action(async (name, options) => {
                 if (name === undefined) {
-                    const TIPS = {
-                        block: ['s-user-transfer, @cloud-ui/s-user-transfer'],
-                        component: ['s-user-transfer, @cloud-ui/s-user-transfer'],
-                        repository: ['my-materials'],
-                        'multifile-block': ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
-                        'multifile-component': ['s-user-transfer.vue, @cloud-ui/s-user-transfer.vue'],
-                    };
+                    const TIPS = typeTips;
 
                     const { packageName } = await inquirer.prompt([
                         {
@@ -60,30 +55,28 @@ module.exports = function () {
 
     program
         .command('template [package-name]')
-        .description(`Initialize a vusion template, default: cloud-admin-lite`)
+        .description(`Initialize a vusion template, default: ${defaultTemplate}`)
         .option('-t, --template <template-name>', 'base on template')
         .option('-f, --force', 'Force overwriting if directory existing')
         .action(async (name, options) => {
             const type = 'template';
+            options.template = options.template || defaultTemplate;
+            // if (!options.template) {
+            //     const { template } = await inquirer.prompt([
+            //         {
+            //             type: 'input',
+            //             name: 'template',
+            //             message: 'Please input a based-on template name',
+            //             default: defaultTemplate,
+            //         },
+            //     ]);
 
-            if (!options.template) {
-                const { template } = await inquirer.prompt([
-                    {
-                        type: 'input',
-                        name: 'template',
-                        message: 'Please input a based-on template name',
-                        default: 'cloud-admin-lite',
-                    },
-                ]);
-
-                /* eslint-disable require-atomic-updates */
-                options.template = template;
-            }
+            //     /* eslint-disable require-atomic-updates */
+            //     options.template = template;
+            // }
 
             if (name === undefined) {
-                const TIPS = {
-                    template: ['my-template'],
-                };
+                const TIPS = typeTips;
 
                 const { packageName } = await inquirer.prompt([
                     {
@@ -124,7 +117,7 @@ module.exports = function () {
                         type: 'input',
                         name: 'packageName',
                         message: `Please input the project name`,
-                        default: 'my-project',
+                        default: 'my-admin',
                         validate(name) {
                             return !!name;
                         },
