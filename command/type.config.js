@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const defaultTemplate = 'cloud-admin-lite';
+
 const map = {
     component: {
         tip: ['s-user-transfer, @cloud-ui/s-user-transfer'],
@@ -11,16 +12,16 @@ const map = {
         source: '@vusion-templates/repository',
         label: 'repository' + chalk.gray(' - Initialize a material repository to store components and blocks'),
     },
-    'multifile-block': {
-        tip: ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
-        source: '@vusion-templates/multifile-block',
-        label: 'multifile-block' + chalk.gray(' - Initialize a vusion multifile block'),
-    },
-    'multifile-component': {
-        tip: ['s-user-transfer.vue, @cloud-ui/s-user-transfer.vue'],
-        source: '@vusion-templates/multifile-component',
-        label: 'multifile-component' + chalk.gray(' - Initialize a vusion multifile custom component'),
-    },
+    // 'multifile-block': {
+    //     tip: ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
+    //     source: '@vusion-templates/multifile-block',
+    //     label: 'multifile-block' + chalk.gray(' - Initialize a vusion multifile block'),
+    // },
+    // 'multifile-component': {
+    //     tip: ['s-user-transfer.vue, @cloud-ui/s-user-transfer.vue'],
+    //     source: '@vusion-templates/multifile-component',
+    //     label: 'multifile-component' + chalk.gray(' - Initialize a vusion multifile custom component'),
+    // },
     block: {
         tip: ['s-search-form', '@cloud-ui/s-search-form'],
         source: '@vusion-templates/block',
@@ -28,7 +29,7 @@ const map = {
     },
     template: {
         tip: ['my-template'],
-        label: 'template' + chalk.gray(` - Initialize a template based on ${defaultTemplate}(default).`),
+        label: 'template' + chalk.gray(` - Initialize a template based on ${defaultTemplate} (default).`),
     },
 };
 const contributorTypes = [
@@ -36,9 +37,10 @@ const contributorTypes = [
     'component',
     'template',
     'repository',
-    'multifile-block',
-    'multifile-component',
+    // 'multifile-block',
+    // 'multifile-component',
 ];
+
 const typeList = contributorTypes.map((key) => ({
     value: key,
     name: map[key].label,
@@ -46,9 +48,10 @@ const typeList = contributorTypes.map((key) => ({
 
 exports.contributorTypes = contributorTypes;
 exports.typeList = typeList;
-const formatNameTypes = ['block', 'component', 'multifile-block', 'multifile-component'];
+const formatNameTypes = ['block', 'component']; // , 'multifile-block', 'multifile-component'];
 exports.formatNameTypes = formatNameTypes;
 exports.formatTypes = formatNameTypes.concat(['repository']);
+
 const tips = {};
 const typeSources = {};
 Object.keys(map).forEach((k) => {

@@ -11,7 +11,7 @@ module.exports = async function () {
         message: 'Select a material type',
         choices: [
             {
-                name: 'app' + chalk.gray(` - Initialize a project based on ${defaultTemplate}(default).`),
+                name: 'app' + chalk.gray(` - Initialize a project based on ${defaultTemplate} (default).`),
                 value: 'app',
             },
         ].concat(typeList),

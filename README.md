@@ -40,8 +40,6 @@ npm install -g create-vusion
 - `npm init vusion repository [package-name]`: Initialize a vusion repository
 - `npm init vusion template [package-name] [options]`: Initialize a template based on an existing template
   - `-t, --template <template-name>`: Based on template-name (default: [cloud-admin-lite](https://github.com/vusion-templates/cloud-admin-lite))
-- `npm init vusion multifile-block [package-name]`: Initialize a vusion multifile block. Compat old version
-- `npm init vusion multifile-component [package-name]`: Initialize a vusion multifile component. Compat old version
 
 #### prompt
 
