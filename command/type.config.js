@@ -1,9 +1,9 @@
 const chalk = require('chalk');
-const defaultTemplate = 'cloud-admin-lite';
+const DEFAULT_TEMPLATE = 'cloud-admin-lite';
 
 const map = {
     component: {
-        tip: ['s-user-transfer, @cloud-ui/s-user-transfer'],
+        tip: ['s-user-transfer.vue, @cloud-ui/s-user-transfer.vue'],
         source: '@vusion-templates/component',
         label: 'component' + chalk.gray(' - Initialize a vusion custom component'),
     },
@@ -23,16 +23,16 @@ const map = {
     //     label: 'multifile-component' + chalk.gray(' - Initialize a vusion multifile custom component'),
     // },
     block: {
-        tip: ['s-search-form', '@cloud-ui/s-search-form'],
+        tip: ['s-search-form.vue', '@cloud-ui/s-search-form.vue'],
         source: '@vusion-templates/block',
         label: 'block' + chalk.gray(' - Initialize a vusion block'),
     },
     template: {
         tip: ['my-template'],
-        label: 'template' + chalk.gray(` - Initialize a template based on ${defaultTemplate} (default).`),
+        label: 'template' + chalk.gray(` - Initialize a template based on ${DEFAULT_TEMPLATE} (default).`),
     },
 };
-const contributorTypes = [
+const CONTRIBUTOR_TYPES = [
     'block',
     'component',
     'template',
@@ -41,27 +41,27 @@ const contributorTypes = [
     // 'multifile-component',
 ];
 
-const typeList = contributorTypes.map((key) => ({
+const TYPE_LIST = CONTRIBUTOR_TYPES.map((key) => ({
     value: key,
     name: map[key].label,
 }));
 
-exports.contributorTypes = contributorTypes;
-exports.typeList = typeList;
-const formatNameTypes = ['block', 'component']; // , 'multifile-block', 'multifile-component'];
-exports.formatNameTypes = formatNameTypes;
-exports.formatTypes = formatNameTypes.concat(['repository']);
+exports.CONTRIBUTOR_TYPES = CONTRIBUTOR_TYPES;
+exports.TYPE_LIST = TYPE_LIST;
+const FORMAT_NAME_TYPES = ['block', 'component']; // , 'multifile-block', 'multifile-component'];
+exports.FORMAT_NAME_TYPES = FORMAT_NAME_TYPES;
+exports.FORMAT_TYPES = FORMAT_NAME_TYPES.concat(['repository']);
 
-const tips = {};
-const typeSources = {};
+const TYPE_TIPS = {};
+const MATERIAL_SOURCES = {};
 Object.keys(map).forEach((k) => {
     if (map[k].tip) {
-        tips[k] = map[k].tip;
+        TYPE_TIPS[k] = map[k].tip;
     }
     if (map[k].source) {
-        typeSources[k] = map[k].source;
+        MATERIAL_SOURCES[k] = map[k].source;
     }
 });
-exports.typeTips = tips;
-exports.typeSources = typeSources;
-exports.defaultTemplate = defaultTemplate;
+exports.TYPE_TIPS = TYPE_TIPS;
+exports.MATERIAL_SOURCES = MATERIAL_SOURCES;
+exports.DEFAULT_TEMPLATE = DEFAULT_TEMPLATE;

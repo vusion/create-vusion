@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const init = require('../lib/material/init');
 const utils = require('../lib/utils');
-const { typeList, contributorTypes, typeTips, defaultTemplate } = require('./type.config');
+const { TYPE_LIST, CONTRIBUTOR_TYPES, TYPE_TIPS, DEFAULT_TEMPLATE } = require('./type.config');
 
 module.exports = async function () {
     let { type } = await inquirer.prompt([{
@@ -11,17 +11,17 @@ module.exports = async function () {
         message: 'Select a material type',
         choices: [
             {
-                name: 'app' + chalk.gray(` - Initialize a project based on ${defaultTemplate} (default).`),
+                name: 'app' + chalk.gray(` - Initialize a project based on ${DEFAULT_TEMPLATE} (default).`),
                 value: 'app',
             },
-        ].concat(typeList),
+        ].concat(TYPE_LIST),
     }]);
     if (type === 'app') {
         const { templateName } = await inquirer.prompt([{
             type: 'input',
             name: 'templateName',
             message: 'Please input a template name',
-            default: defaultTemplate,
+            default: DEFAULT_TEMPLATE,
         }]);
         type = templateName;
     }
@@ -31,19 +31,17 @@ module.exports = async function () {
             type: 'input',
             name: 'templateName',
             message: 'Please input a template name',
-            default: defaultTemplate,
+            default: DEFAULT_TEMPLATE,
         }]);
         material = templateName;
     }
 
-    const TIPS = typeTips;
-
     let message = `Please input a package name.
   It will also be used as the ${type} name and file name.
-  For examples: ${chalk.cyan((TIPS[type] || []).join(', '))}
+  For examples: ${chalk.cyan((TYPE_TIPS[type] || []).join(', '))}
  `;
 
-    if (!contributorTypes.includes(type))
+    if (!CONTRIBUTOR_TYPES.includes(type))
         message = `Please input the project name`;
 
     const { name } = await inquirer.prompt([
@@ -51,7 +49,7 @@ module.exports = async function () {
             type: 'input',
             name: 'name',
             message,
-            default: !contributorTypes.includes(type) ? 'my-admin' : undefined,
+            default: !CONTRIBUTOR_TYPES.includes(type) ? 'my-admin' : undefined,
             validate(name) {
                 return !!name;
             },
@@ -66,6 +64,6 @@ module.exports = async function () {
         access: 'public',
         team: '',
     }, {
-        isUser: !contributorTypes.includes(type),
+        isUser: !CONTRIBUTOR_TYPES.includes(type),
     });
 };

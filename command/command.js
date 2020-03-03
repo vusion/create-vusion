@@ -4,7 +4,7 @@ const chalk = require('chalk');
 const pkg = require('../package.json');
 const init = require('../lib/material/init');
 const utils = require('../lib/utils');
-const { typeTips, formatTypes, defaultTemplate } = require('./type.config');
+const { TYPE_TIPS, FORMAT_TYPES, DEFAULT_TEMPLATE } = require('./type.config');
 
 module.exports = function () {
     program
@@ -14,22 +14,20 @@ module.exports = function () {
 `)
         .version(pkg.version);
 
-    formatTypes.forEach((type) => {
+    FORMAT_TYPES.forEach((type) => {
         program
             .command(`${type} [package-name]`)
             .description(`Initialize a vusion ${type}`)
             .option('-f, --force', 'Force overwriting if directory existing')
             .action(async (name, options) => {
                 if (name === undefined) {
-                    const TIPS = typeTips;
-
                     const { packageName } = await inquirer.prompt([
                         {
                             type: 'input',
                             name: 'packageName',
                             message: `Please input a package name.
   It will also be used as the ${type} name and file name.
-  For examples: ${chalk.cyan(TIPS[type].join(', '))}
+  For examples: ${chalk.cyan(TYPE_TIPS[type].join(', '))}
  `,
                             validate(name) {
                                 return !!name;
@@ -55,19 +53,19 @@ module.exports = function () {
 
     program
         .command('template [package-name]')
-        .description(`Initialize a vusion template, default: ${defaultTemplate}`)
+        .description(`Initialize a vusion template, default: ${DEFAULT_TEMPLATE}`)
         .option('-t, --template <template-name>', 'base on template')
         .option('-f, --force', 'Force overwriting if directory existing')
         .action(async (name, options) => {
             const type = 'template';
-            options.template = options.template || defaultTemplate;
+            options.template = options.template || DEFAULT_TEMPLATE;
             // if (!options.template) {
             //     const { template } = await inquirer.prompt([
             //         {
             //             type: 'input',
             //             name: 'template',
             //             message: 'Please input a based-on template name',
-            //             default: defaultTemplate,
+            //             default: DEFAULT_TEMPLATE,
             //         },
             //     ]);
 
@@ -76,15 +74,13 @@ module.exports = function () {
             // }
 
             if (name === undefined) {
-                const TIPS = typeTips;
-
                 const { packageName } = await inquirer.prompt([
                     {
                         type: 'input',
                         name: 'packageName',
                         message: `Please input a package name.
   It will also be used as the ${type} name and file name.
-  For examples: ${chalk.cyan(TIPS[type].join(', '))}
+  For examples: ${chalk.cyan(TYPE_TIPS[type].join(', '))}
  `,
                         validate(name) {
                             return !!name;
