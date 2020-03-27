@@ -11,7 +11,7 @@ module.exports = async function () {
         message: 'Select a material type',
         choices: [
             {
-                name: 'app' + chalk.gray(` - Initialize a project based on ${DEFAULT_TEMPLATE} (default).`),
+                name: 'app' + chalk.gray(` - Initialize a project from a template`),
                 value: 'app',
             },
         ].concat(TYPE_LIST),
@@ -20,7 +20,7 @@ module.exports = async function () {
         const { templateName } = await inquirer.prompt([{
             type: 'input',
             name: 'templateName',
-            message: 'Please input a template name',
+            message: 'Please input a template name. Default is',
             default: DEFAULT_TEMPLATE,
         }]);
         type = templateName;
