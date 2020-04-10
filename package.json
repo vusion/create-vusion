@@ -1,6 +1,6 @@
 {
   "name": "create-vusion",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "CLI for create Vusion Projects.",
   "main": "index.js",
   "bin": {
@@ -51,7 +51,7 @@
     "semver": "^6.3.0",
     "shelljs": "^0.8.3",
     "update-notifier": "^3.0.1",
-    "vusion-api": "^0.5.17"
+    "vusion-api": "^0.6.0"
   },
   "devDependencies": {
     "eslint": "^6.6.0",
