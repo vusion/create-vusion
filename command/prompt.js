@@ -20,7 +20,7 @@ module.exports = async function () {
         const { templateName } = await inquirer.prompt([{
             type: 'input',
             name: 'templateName',
-            message: 'Please input a template name. Default is',
+            message: 'Please input a template. Default is',
             default: DEFAULT_TEMPLATE,
         }]);
         type = templateName;
@@ -30,7 +30,7 @@ module.exports = async function () {
         const { templateName } = await inquirer.prompt([{
             type: 'input',
             name: 'templateName',
-            message: 'Please input a template name',
+            message: 'Please input a template',
             default: DEFAULT_TEMPLATE,
         }]);
         material = templateName;
