@@ -29,7 +29,11 @@ npm install -g create-vusion
 
 ### User
 
-- `npm create vusion [template-name] [package-name]`: Initialize a vusion project based on [template-name]
+- `npm create vusion app [package-name] --client-template [client-template-name]`: Initialize a vusion project based on [client-template-name].
+
+- `npm create vusion app [package-name] --client-template [client-template-name] --server-template [server-template-name]`: Initialize a vusion project based on [client-template-name] with [server-template-name].
+  - `-c, --client-template [client-template-name]`:Based on template-name (default: [cloud-admin-lite](https://github.com/vusion-templates/cloud-admin-lite))
+  - `-s, --server-template [server-template-name]`:Based on template-name (default: [cloud-admin-fullstack](https://github.com/vusion-templates/cloud-admin-fullstack))
 
 ### Contributor
 

@@ -105,8 +105,8 @@ module.exports = function () {
 
     program
         .command('app [app-name]')
-        .option('-c, --client-template <client-template-name>', 'base on client-template')
-        .option('-s, --server-template <server-template-name>', 'base on server-template')
+        .option('-c, --client-template [client-template-name]', 'base on client-template')
+        .option('-s, --server-template [server-template-name]', 'base on server-template')
         .option('-f, --force', 'Force overwriting if directory existing')
         .action(async (appName, options) => {
             if (appName === undefined) {
@@ -124,51 +124,39 @@ module.exports = function () {
 
                 appName = packageName;
             }
-
-            return init({
-                type: 'fullstack',
-                material: [options.serverTemplate || DEFAULT_SERVER_TEMPLATE, options.clientTemplate || DEFAULT_TEMPLATE],
-                name: appName,
-                path: appName,
-                access: 'public',
-                team: '',
-            }, {
-                force: options.force,
-                isUser: true,
-            });
-        });
-    program
-        .arguments('[template-name] [app-name]')
-        .option('-f, --force', 'Force overwriting if directory existing')
-        .option('-d, --directory', 'Project directory if not same with app-name')
-        .action(async (templateName, name, options) => {
-            if (name === undefined) {
-                const { packageName } = await inquirer.prompt([
-                    {
-                        type: 'input',
-                        name: 'packageName',
-                        message: `Please input the project name`,
-                        default: 'my-admin',
-                        validate(name) {
-                            return !!name;
-                        },
-                    },
-                ]);
-
-                name = packageName;
+            let clientTemplate = options.clientTemplate;
+            let serverTemplate = options.serverTemplate;
+            if (clientTemplate === true) {
+                clientTemplate = DEFAULT_TEMPLATE;
             }
-
-            return init({
-                type: templateName,
-                material: templateName,
-                name,
-                path: options.directory || name,
-                access: 'public',
-                team: '',
-            }, {
-                force: options.force,
-                isUser: true,
-            });
+            if (serverTemplate === true) {
+                serverTemplate = DEFAULT_SERVER_TEMPLATE;
+            }
+            if (serverTemplate && clientTemplate) {
+                return init({
+                    type: 'fullstack',
+                    material: [serverTemplate, clientTemplate],
+                    name: appName,
+                    path: appName,
+                    access: 'public',
+                    team: '',
+                }, {
+                    force: options.force,
+                    isUser: true,
+                });
+            } else if (clientTemplate) {
+                return init({
+                    type: clientTemplate,
+                    material: clientTemplate,
+                    name: appName,
+                    path: appName,
+                    access: 'public',
+                    team: '',
+                }, {
+                    force: options.force,
+                    isUser: true,
+                });
+            }
         });
 
     program.parse(process.argv);
