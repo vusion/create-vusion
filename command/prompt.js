@@ -2,9 +2,10 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const init = require('../lib/material/init');
 const utils = require('../lib/utils');
-const { TYPE_LIST, CONTRIBUTOR_TYPES, TYPE_TIPS, DEFAULT_TEMPLATE } = require('./type.config');
+const { TYPE_LIST, CONTRIBUTOR_TYPES, TYPE_TIPS, DEFAULT_TEMPLATE, DEFAULT_SERVER_TEMPLATE } = require('./type.config');
 
 module.exports = async function () {
+    let projectPath = '';
     let { type } = await inquirer.prompt([{
         type: 'list',
         name: 'type',
@@ -13,6 +14,10 @@ module.exports = async function () {
             {
                 name: 'app' + chalk.gray(` - Initialize a project from a template`),
                 value: 'app',
+            },
+            {
+                name: 'fullstack' + chalk.gray(` - Initialize a project from a server template & client template`),
+                value: 'fullstack',
             },
         ].concat(TYPE_LIST),
     }]);
@@ -24,8 +29,31 @@ module.exports = async function () {
             default: DEFAULT_TEMPLATE,
         }]);
         type = templateName;
+        const { path } = await inquirer.prompt([{
+            type: 'input',
+            name: 'path',
+            message: 'Please input a directory. Default is',
+            default: templateName,
+        }]);
+        projectPath = path;
     }
     let material;
+    if (type === 'fullstack') {
+        const { serverTemplateName } = await inquirer.prompt([{
+            type: 'input',
+            name: 'serverTemplateName',
+            message: 'Please input a server-template. Default is',
+            default: DEFAULT_SERVER_TEMPLATE,
+        }]);
+        const { clientTemplateName } = await inquirer.prompt([{
+            type: 'input',
+            name: 'clientTemplateName',
+            message: 'Please input a client-template. Default is',
+            default: DEFAULT_TEMPLATE,
+        }]);
+        material = [serverTemplateName, clientTemplateName];
+    }
+
     if (type === 'template') {
         const { templateName } = await inquirer.prompt([{
             type: 'input',
@@ -60,7 +88,7 @@ module.exports = async function () {
         type,
         material: material || type,
         name,
-        path: utils.getFileName(name),
+        path: projectPath || utils.getFileName(name),
         access: 'public',
         team: '',
     }, {

@@ -4,7 +4,7 @@ const chalk = require('chalk');
 const pkg = require('../package.json');
 const init = require('../lib/material/init');
 const utils = require('../lib/utils');
-const { TYPE_TIPS, FORMAT_TYPES, DEFAULT_TEMPLATE } = require('./type.config');
+const { TYPE_TIPS, FORMAT_TYPES, DEFAULT_TEMPLATE, DEFAULT_SERVER_TEMPLATE } = require('./type.config');
 
 module.exports = function () {
     program
@@ -104,8 +104,43 @@ module.exports = function () {
         });
 
     program
+        .command('app [app-name]')
+        .option('-c, --client-template <client-template-name>', 'base on client-template')
+        .option('-s, --server-template <server-template-name>', 'base on server-template')
+        .option('-f, --force', 'Force overwriting if directory existing')
+        .action(async (appName, options) => {
+            if (appName === undefined) {
+                const { packageName } = await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'packageName',
+                        message: `Please input the project name`,
+                        default: 'my-app',
+                        validate(packageName) {
+                            return !!packageName;
+                        },
+                    },
+                ]);
+
+                appName = packageName;
+            }
+
+            return init({
+                type: 'fullstack',
+                material: [options.serverTemplate || DEFAULT_SERVER_TEMPLATE, options.clientTemplate || DEFAULT_TEMPLATE],
+                name: appName,
+                path: appName,
+                access: 'public',
+                team: '',
+            }, {
+                force: options.force,
+                isUser: true,
+            });
+        });
+    program
         .arguments('[template-name] [app-name]')
         .option('-f, --force', 'Force overwriting if directory existing')
+        .option('-d, --directory', 'Project directory if not same with app-name')
         .action(async (templateName, name, options) => {
             if (name === undefined) {
                 const { packageName } = await inquirer.prompt([
@@ -127,7 +162,7 @@ module.exports = function () {
                 type: templateName,
                 material: templateName,
                 name,
-                path: name,
+                path: options.directory || name,
                 access: 'public',
                 team: '',
             }, {

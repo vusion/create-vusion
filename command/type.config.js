@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const DEFAULT_TEMPLATE = 'cloud-admin-lite';
+const DEFAULT_SERVER_TEMPLATE = 'cloud-admin-fullstack';
 
 const map = {
     component: {
@@ -30,6 +31,9 @@ const map = {
     template: {
         tip: ['my-template'],
         label: 'template' + chalk.gray(` - Initialize a template based on ${DEFAULT_TEMPLATE} (default).`),
+    },
+    fullstack: {
+        source: 'cloud-admin-fullstack',
     },
 };
 const CONTRIBUTOR_TYPES = [
@@ -65,3 +69,4 @@ Object.keys(map).forEach((k) => {
 exports.TYPE_TIPS = TYPE_TIPS;
 exports.MATERIAL_SOURCES = MATERIAL_SOURCES;
 exports.DEFAULT_TEMPLATE = DEFAULT_TEMPLATE;
+exports.DEFAULT_SERVER_TEMPLATE = DEFAULT_SERVER_TEMPLATE;
