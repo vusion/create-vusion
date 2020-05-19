@@ -66,6 +66,7 @@ Object.keys(map).forEach((k) => {
         MATERIAL_SOURCES[k] = map[k].source;
     }
 });
+
 exports.TYPE_TIPS = TYPE_TIPS;
 exports.MATERIAL_SOURCES = MATERIAL_SOURCES;
 exports.DEFAULT_TEMPLATE = DEFAULT_TEMPLATE;

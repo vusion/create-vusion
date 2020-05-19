@@ -5,7 +5,6 @@ const utils = require('../lib/utils');
 const { TYPE_LIST, CONTRIBUTOR_TYPES, TYPE_TIPS, DEFAULT_TEMPLATE, DEFAULT_SERVER_TEMPLATE } = require('./type.config');
 
 module.exports = async function () {
-    let projectPath = '';
     let { type } = await inquirer.prompt([{
         type: 'list',
         name: 'type',
@@ -29,13 +28,6 @@ module.exports = async function () {
             default: DEFAULT_TEMPLATE,
         }]);
         type = templateName;
-        const { path } = await inquirer.prompt([{
-            type: 'input',
-            name: 'path',
-            message: 'Please input a directory. Default is',
-            default: templateName,
-        }]);
-        projectPath = path;
     }
     let material;
     if (type === 'fullstack') {
@@ -77,7 +69,7 @@ module.exports = async function () {
             type: 'input',
             name: 'name',
             message,
-            default: !CONTRIBUTOR_TYPES.includes(type) ? 'my-admin' : undefined,
+            default: !CONTRIBUTOR_TYPES.includes(type) ? 'my-app' : undefined,
             validate(name) {
                 return !!name;
             },
@@ -88,7 +80,7 @@ module.exports = async function () {
         type,
         material: material || type,
         name,
-        path: projectPath || utils.getFileName(name),
+        path: utils.getFileName(name),
         access: 'public',
         team: '',
     }, {

@@ -11,9 +11,9 @@ npm init vusion
 ```
 
 ``` shell
-npm create vusion admin-cloud-lite my-admin
+npm create vusion admin-cloud-lite my-app
 // same as
-npm init vusion admin-cloud-lite my-admin
+npm init vusion admin-cloud-lite my-app
 ```
 
 ## Install
