@@ -107,6 +107,7 @@ module.exports = function () {
         .command('app [app-name]')
         .option('-c, --client-template [client-template-name]', 'base on client-template')
         .option('-s, --server-template [server-template-name]', 'base on server-template')
+        .option('--not-download', 'not download project, use local')
         .option('-f, --force', 'Force overwriting if directory existing')
         .action(async (appName, options) => {
             if (appName === undefined) {
@@ -143,6 +144,7 @@ module.exports = function () {
                 }, {
                     force: options.force,
                     isUser: true,
+                    notDownload: options.notDownload,
                 });
             } else if (clientTemplate) {
                 return init({
