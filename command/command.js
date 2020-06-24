@@ -108,6 +108,7 @@ module.exports = function () {
         .option('-c, --client-template [client-template-name]', 'base on client-template')
         .option('-s, --server-template [server-template-name]', 'base on server-template')
         .option('--not-download', 'not download project, use local')
+        .option('--cache', 'save as a cache')
         .option('--dir [dir]', 'custom root directory')
         .option('-f, --force', 'Force overwriting if directory existing')
         .action(async (appName, options) => {
@@ -144,6 +145,7 @@ module.exports = function () {
                     team: '',
                 }, {
                     force: options.force,
+                    cache: options.cache,
                     isUser: true,
                     notDownload: options.notDownload,
                 });
