@@ -109,6 +109,7 @@ module.exports = function () {
         .option('-s, --server-template [server-template-name]', 'base on server-template')
         .option('--not-download', 'not download project, use local')
         .option('--cache', 'save as a cache')
+        .option('--config [config]', 'special config')
         .option('--dir [dir]', 'custom root directory')
         .option('-f, --force', 'Force overwriting if directory existing')
         .action(async (appName, options) => {
@@ -148,6 +149,7 @@ module.exports = function () {
                     cache: options.cache,
                     isUser: true,
                     notDownload: options.notDownload,
+                    config: options.config,
                 });
             } else if (clientTemplate) {
                 return init({
