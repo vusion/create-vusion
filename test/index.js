@@ -4,7 +4,7 @@ const path = require('path');
 const chalk = require('chalk');
 const assert = require('assert');
 const info = {
-    params: '{"client":"cloud-admin-template","server":"cloud-admin-fullstack","config":"{\\"projectId\\":\\"1\\",\\"tenantId\\":\\"1\\"}","name":"test"}',
+    params: '{"client":"cloud-admin-template","server":"cloud-admin-fullstack","config":"{\\"projectId\\":\\"1\\",\\"tenantId\\":\\"1\\",\\"tenant\\":\\"aa\\"}","name":"test"}',
 };
 const params = JSON.parse(info.params);
 childProcess.execSync('./bin/create-vusion app test -f -c cloud-admin-template -s cloud-admin-fullstack --config ' + JSON.stringify(params.config) + ' --dir ' + __dirname + '/tmp', {
