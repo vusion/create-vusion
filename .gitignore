@@ -3,6 +3,7 @@ node_modules/
 public/
 dist/
 tmp/
+.tmp/
 .vusion-tmp/
 npm-debug.log
 __requireTest_*

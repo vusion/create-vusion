@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const pkg = require('../package.json');
 const init = require('../lib/material/init');
+const fullstack = require('../lib/material/fullstack');
 const utils = require('../lib/utils');
 const { TYPE_TIPS, FORMAT_TYPES, DEFAULT_TEMPLATE, DEFAULT_SERVER_TEMPLATE } = require('./type.config');
 
@@ -166,5 +167,58 @@ module.exports = function () {
             }
         });
 
+    program
+        .command('fullstack [app-name]')
+        .option('-t, --template [template-name]', 'base on template')
+        .option('--not-download', 'not download project, use local')
+        .option('--cache', 'save as a cache')
+        .option('--config [config]', 'special config')
+        .option('--dir [dir]', 'custom root directory')
+        .option('-f, --force', 'Force overwriting if directory existing')
+        .action(async (appName, options) => {
+            if (appName === undefined) {
+                const { packageName } = await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'packageName',
+                        message: `Please input the project name`,
+                        default: 'my-app',
+                        validate(packageName) {
+                            return !!packageName;
+                        },
+                    },
+                ]);
+                appName = packageName;
+            }
+            let templateName = options.template;
+            if (templateName === undefined) {
+                const { template } = await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'template',
+                        message: `Please input the template name`,
+                        default: 'lcap-pc-template',
+                        validate(template) {
+                            return !!template;
+                        },
+                    },
+                ]);
+                templateName = template;
+            }
+            return fullstack({
+                type: 'fullstack-all',
+                material: templateName,
+                name: appName,
+                path: options.dir || appName,
+                access: 'public',
+                team: '',
+            }, {
+                force: options.force,
+                cache: options.cache,
+                isUser: true,
+                notDownload: options.notDownload,
+                config: options.config,
+            });
+        });
     program.parse(process.argv);
 };
