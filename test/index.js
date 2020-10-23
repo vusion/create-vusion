@@ -7,7 +7,7 @@ const info = {
     params: '{"client":"cloud-admin-template","server":"cloud-admin-fullstack","config":"{\\"projectId\\":\\"1\\",\\"tenantId\\":\\"1\\",\\"tenant\\":\\"aa\\"}","name":"test"}',
 };
 const params = JSON.parse(info.params);
-childProcess.execSync('./bin/create-vusion app test -f -c cloud-admin-template -s cloud-admin-fullstack --config ' + JSON.stringify(params.config) + ' --dir ' + __dirname + '/tmp', {
+childProcess.execSync('./bin/create-vusion app test -f -c cloud-admin-template#0.14.11 -s cloud-admin-fullstack#0.3.10 --config ' + JSON.stringify(params.config) + ' --dir ' + __dirname + '/tmp', {
     stdio: 'inherit',
     pwd: __dirname,
 });
